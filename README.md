@@ -1,5 +1,5 @@
 
-# Logz4Bugz
+# [BugLogz](https://logz4bugz.herokuapp.com/)
 
 This is a simple bug tracking application created using Python Flask framework. The application is designed to help a software development team share and manage bugs that have been discovered during testing
 
