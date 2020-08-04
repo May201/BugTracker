@@ -1,7 +1,7 @@
 import os
 from flask import Flask, render_template, redirect, request
 from flask_pymongo import PyMongo
-# from bson.objectid import ObjectId 
+from bson.objectid import ObjectId
 
 
 app = Flask(__name__)
@@ -32,8 +32,30 @@ def create_bug():
     if request.method == "GET":
         return render_template("create-bug.html")
     else:
-        # TODO: Save bug information to DB
+        db.Issue_Log.insert_one(request.form.to_dict())
         return redirect("/dashboard")
+
+
+@app.route('/edit_task/<task_id>')
+def edit_task(task_id):
+    # the_task =  mongo.db.tasks.find_one({"_id": ObjectId(task_id)})
+    # all_categories =  mongo.db.categories.find()
+    # return render_template('edittask.html', task=the_task,
+    #                        categories=all_categories)
+    return redirect("/dashboard")
+
+
+@app.route('/mark_complete/<task_id>')
+def mark_complete(task_id):
+    db.Issue_Log.update(
+        {'_id': ObjectId(task_id)},
+        {
+            '$set': {
+                'status': 'Completed'
+            }
+        }
+    )
+    return redirect("/dashboard")
 
 
 @app.route('/dashboard')

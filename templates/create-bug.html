@@ -2,5 +2,46 @@
 {% block content %}
     <p>Create a Bug</p>
     <form action="/create-bug" method="POST">
+        <div class="row">
+            <div class="input-field col s12">
+                <input name="title">
+                <label for="title">Title</label>
+            </div>
+        </div>                        
+        <div class="row">
+            <div class="input-field col s12">
+                <textarea name="desc" cols="50" rows="5" placeholder="Enter a Description" class="materialize-textarea"></textarea>
+                <label for="desc">Description</label>
+            </div>
+        </div>                
+        <div class="row">
+            <div class="input-field col s12">
+                <select name="priority">
+                    <option>Urgent</option>
+                    <option>High</option>
+                    <option>Normal</option>
+                    <option>Low</option>
+                </select>
+                <label for="priority">Priority</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <select name="status">
+                    <option>Open</option>
+                    <option>Closed</option>
+                    <option>In Progress</option>
+                </select>
+                <label for="status">Status</label>
+            </div>
+        </div>
+        <div class="row">
+            <div class="input-field col s12">
+                <i class="material-icons prefix">today</i>
+                <input id="due_date" name="created" type="text" class="datepicker">
+                <label for="icon_prefix">Created</label>
+            </div>
+        </div>
+        <button type="submit">Create</button>
     </form>
 {% endblock %}
