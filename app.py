@@ -1,5 +1,5 @@
 import os
-from flask import Flask, render_template, redirect, request
+from flask import Flask, render_template, redirect, request, session
 from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 
@@ -8,6 +8,7 @@ from bson.objectid import ObjectId
 app = Flask(__name__)
 app.config["MONGO_DBNAME"] = 'Bugtracker'
 app.config["MONGO_URI"] = os.getenv('MONGO_URI', 'mongodb://localhost')
+app.secret_key = os.urandom(24)
 
 # Shortcut to the database
 db = PyMongo(app).db
@@ -20,11 +21,20 @@ def login():
         return render_template("login.html")
 
     # Check login details and then redirect to dashboard
-    existing_user = db.users.find_one({'email': request.form.get('email')})
+    user_email = request.form.get('email')
+    existing_user = db.users.find_one({'email': user_email})
     if existing_user is None:
         return render_template("login.html", error=True)
 
+    session['user_email'] = user_email
     return redirect("/dashboard")
+
+
+@app.route("/logout")
+def logout():
+    # Reset the user email in the session
+    session['user_email'] = ''
+    return redirect("/login")
 
 
 @app.route("/signup", methods=["GET", "POST"])
@@ -34,12 +44,14 @@ def signup():
         return render_template("signup.html")
 
     # On successfull signup, redirect to dashboard
-    existing_user = db.users.find_one({'email': request.form.get('email')})
+    user_email = request.form.get('email')
+    existing_user = db.users.find_one({'email': user_email})
     if existing_user is None:
         db.users.insert_one(request.form.to_dict())
     else:
         return render_template("signup.html", error=True)
 
+    session['user_email'] = user_email
     return redirect("/dashboard")
 
 
