@@ -20,6 +20,10 @@ def login():
         return render_template("login.html")
 
     # Check login details and then redirect to dashboard
+    existing_user = db.users.find_one({'email': request.form.get('email')})
+    if existing_user is None:
+        return render_template("login.html", error=True)
+
     return redirect("/dashboard")
 
 
@@ -30,6 +34,12 @@ def signup():
         return render_template("signup.html")
 
     # On successfull signup, redirect to dashboard
+    existing_user = db.users.find_one({'email': request.form.get('email')})
+    if existing_user is None:
+        db.users.insert_one(request.form.to_dict())
+    else:
+        return render_template("/signup", error=True)
+
     return redirect("/dashboard")
 
 

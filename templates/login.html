@@ -1,21 +1,22 @@
 {% extends "base.html" %}
 {% block content %}
     <div class="row">
-    <h3>Login</h3>
-    <form action="/login" method="POST" class="col s12">
-        <div class="row">
-            <div class="input-field ">
-                <input type="text" name="email" value="" placeholder="Enter email">
+        <h3>Login</h3>
+        {% if error %}
+            <p style="color: red;">User email does not exist!</p>
+        {% endif %}
+        <form action="/login" method="POST" class="col s12">
+            <div class="row">
+                <div class="input-field ">
+                    <input type="text" name="email" value="" placeholder="Enter email" class="validate">
+                </div>
+                <div class="input-field">
+                    <input type="password" name="password" value="" placeholder="Enter password" class="validate">
+                </div>
+                <button type="submit" class="btn">Login</button>
             </div>
-            <div class="input-field">
-                <input type="password" name="password" value="" placeholder="Enter password">
-            </div>
-            <button type="submit" class="btn">Login</button>
-        </div>
-    </form>
+        </form>
     </div>
     <br/>
-    <form action="/signup" method="POST">
-        <button type="submit" class="btn">Signup</button>
-    </form>
+    <a href="/signup" class="btn">Signup</a>
 {% endblock %}
