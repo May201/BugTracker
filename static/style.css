@@ -8,3 +8,7 @@
     padding: 5px;
     color: white;
 }
+
+.bold {
+    font-weight: 600;
+}

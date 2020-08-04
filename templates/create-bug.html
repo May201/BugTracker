@@ -14,48 +14,50 @@
     </script>
 {% endblock %}
 {% block content %}
-    <h4>Create a Bug</h4>
-    <form action="/create-bug" method="POST">
-        <div class="row">
-            <div class="input-field col s12">
-                <input name="title" class="validate" placeholder="Enter a title">
-                <label for="title" class="active">Title</label>
+    <div class="container">
+        <h4>Create a Bug</h4>
+        <form action="/create-bug" method="POST">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input name="title" class="validate" placeholder="Enter a title">
+                    <label for="title" class="active">Title</label>
+                </div>
+            </div>                        
+            <div class="row">
+                <div class="input-field col s12">
+                    <textarea name="desc" cols="50" rows="5" placeholder="Enter a Description" class="materialize-textarea validate" ></textarea>
+                    <label for="desc">Description</label>
+                </div>
+            </div>                
+            <div class="row">
+                <div class="input-field col s12">
+                    <select name="priority" class="validate">
+                        <option>Urgent</option>
+                        <option>High</option>
+                        <option>Normal</option>
+                        <option>Low</option>
+                    </select>
+                    <label for="priority">Priority</label>
+                </div>
             </div>
-        </div>                        
-        <div class="row">
-            <div class="input-field col s12">
-                <textarea name="desc" cols="50" rows="5" placeholder="Enter a Description" class="materialize-textarea validate" ></textarea>
-                <label for="desc">Description</label>
+            <div class="row">
+                <div class="input-field col s12">
+                    <select name="status" class="validate">
+                        <option>Open</option>
+                        <option>Closed</option>
+                        <option>In Progress</option>
+                    </select>
+                    <label for="status">Status</label>
+                </div>
             </div>
-        </div>                
-        <div class="row">
-            <div class="input-field col s12">
-                <select name="priority" class="validate">
-                    <option>Urgent</option>
-                    <option>High</option>
-                    <option>Normal</option>
-                    <option>Low</option>
-                </select>
-                <label for="priority">Priority</label>
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">today</i>
+                    <input name="created" type="text" class="datepicker validate">
+                    <label for="icon_prefix">Created</label>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
-                <select name="status" class="validate">
-                    <option>Open</option>
-                    <option>Closed</option>
-                    <option>In Progress</option>
-                </select>
-                <label for="status">Status</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
-                <i class="material-icons prefix">today</i>
-                <input name="created" type="text" class="datepicker validate">
-                <label for="icon_prefix">Created</label>
-            </div>
-        </div>
-        <button type="submit" class="btn">Create</button>
-    </form>
+            <button type="submit" class="btn">Create</button>
+        </form>
+    </div>
 {% endblock %}

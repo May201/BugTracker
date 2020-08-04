@@ -14,55 +14,57 @@
     </script>
 {% endblock %}
 {% block content %}
-    <h4>Edit Bug: {{ bug._id }} </h4>
-    <form action="/edit-bug/{{ bug._id }}" method="POST">
-        <div class="row">
-            <div class="input-field col s12">
-                <input name="title" value="{{ bug.title }}" class="validate">
-                <label for="title" class="active">Title</label>
+    <div class="container">
+        <h4>Edit Bug: {{ bug._id }} </h4>
+        <form action="/edit-bug/{{ bug._id }}" method="POST">
+            <div class="row">
+                <div class="input-field col s12">
+                    <input name="title" value="{{ bug.title }}" class="validate">
+                    <label for="title" class="active">Title</label>
+                </div>
+            </div>                        
+            <div class="row">
+                <div class="input-field col s12">
+                    <textarea name="desc" cols="50" rows="5" placeholder="Enter a Description" class="materialize-textarea validate">{{ bug.desc }}</textarea>
+                    <label for="desc">Description</label>
+                </div>
+            </div>                
+            <div class="row">
+                <div class="input-field col s12">
+                    <select name="priority" class="validate">
+                        {% for priority in ['Urgent', 'High', 'Normal', 'Low'] %}
+                            {% if priority == bug.priority %}
+                                <option value="{{ priority }}" selected>{{ priority }}</option>
+                            {% else %}
+                                <option value="{{ priority }}">{{ priority }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                    <label for="priority">Priority</label>
+                </div>
             </div>
-        </div>                        
-        <div class="row">
-            <div class="input-field col s12">
-                <textarea name="desc" cols="50" rows="5" placeholder="Enter a Description" class="materialize-textarea validate">{{ bug.desc }}</textarea>
-                <label for="desc">Description</label>
+            <div class="row">
+                <div class="input-field col s12">
+                    <select name="status" class="validate">
+                        {% for status in ['Open', 'Closed', 'In Progress', 'Completed'] %}
+                            {% if status == bug.status %}
+                                <option value="{{ status }}" selected>{{ status }}</option>
+                            {% else %}
+                                <option value="{{ status }}">{{ status }}</option>
+                            {% endif %}
+                        {% endfor %}
+                    </select>
+                    <label for="status">Status</label>
+                </div>
             </div>
-        </div>                
-        <div class="row">
-            <div class="input-field col s12">
-                <select name="priority" class="validate">
-                    {% for priority in ['Urgent', 'High', 'Normal', 'Low'] %}
-                        {% if priority == bug.priority %}
-                            <option value="{{ priority }}" selected>{{ priority }}</option>
-                        {% else %}
-                            <option value="{{ priority }}">{{ priority }}</option>
-                        {% endif %}
-                    {% endfor %}
-                </select>
-                <label for="priority">Priority</label>
+            <div class="row">
+                <div class="input-field col s12">
+                    <i class="material-icons prefix">today</i>
+                    <input name="modified" type="text" class="datepicker validate">
+                    <label for="icon_prefix">Modified</label>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
-                <select name="status" class="validate">
-                    {% for status in ['Open', 'Closed', 'In Progress', 'Completed'] %}
-                        {% if status == bug.status %}
-                            <option value="{{ status }}" selected>{{ status }}</option>
-                        {% else %}
-                            <option value="{{ status }}">{{ status }}</option>
-                        {% endif %}
-                    {% endfor %}
-                </select>
-                <label for="status">Status</label>
-            </div>
-        </div>
-        <div class="row">
-            <div class="input-field col s12">
-                <i class="material-icons prefix">today</i>
-                <input name="modified" type="text" class="datepicker validate">
-                <label for="icon_prefix">Modified</label>
-            </div>
-        </div>
-        <button type="submit" class="btn">Save Changes</button>
-    </form>
+            <button type="submit" class="btn">Save Changes</button>
+        </form>
+    </div>
 {% endblock %}

@@ -1,6 +1,7 @@
 {% extends "base.html" %}
 {% block content %}
-    <div class="container-fluid">
+    <br><br>
+    <div class="container">
         <div class="row">
             <div class="col s10">
                 Welcome
@@ -10,7 +11,7 @@
                     <span><b>{{ session['user_email'] }}</b></span>
                 {% endif %}
             </div>
-            <div class="col s2">
+            <div class="col s2 right-align">
                 {% if session.get('user_email', '') == '' %}
                     <a href="/login">Login</a>
                 {% else %}
@@ -19,7 +20,7 @@
             </div>
         </div>
     </div>
-    <div class="container">
+    <div class="container right-align">
         <form action="/create-bug" method="GET" class="col s10">
             <button type="submit" class="btn">Create Bug</button>
         </form>
@@ -27,26 +28,27 @@
     <br><br>
     <div class="container">
         <div class="row">
-            <div class="col s1">ID</div>
-            <div class="col s1">Title</div>
-            <div class="col s2">Description</div>
-            <div class="col s1">Priority</div>
-            <div class="col s1">Status</div>
-            <div class="col show-on-medium-and-up s1">Created</div>
-            <div class="col show-on-medium-and-up s1">Modified</div>
-            <div class="col s4 right-align">Actions</div>
+            <div class="col s1 bold">ID</div>
+            <div class="col s2 bold">Title</div>
+            <div class="col s2 bold">Description</div>
+            <div class="col s1 bold">Priority</div>
+            <div class="col s1 bold">Status</div>
+            <div class="col hide-on-med-and-down s1 bold">Created</div>
+            <div class="col hide-on-med-and-down s1 bold">Modified</div>
+            <div class="col s3 right-align bold">Actions</div>
         </div>
         {% for bug in bugs %}
             <div class="row">
                 <div class="col s1 truncate">{{ bug._id }}</div>
-                <div class="col s2">{{ bug.title }}</div>
+                <div class="col s2 truncate">{{ bug.title }}</div>
                 <div class="col s2 truncate">{{ bug.desc }}</div>
-                <div class="col s1">{{ bug.priority }}</div>
-                <div class="col s1">{{ bug.status }}</div>
-                <div class="col show-on-medium-and-up s1">{{ bug.created }}</div>
-                <div class="col show-on-medium-and-up s1">{{ bug.modified }}</div>
+                <div class="col s1 truncate">{{ bug.priority }}</div>
+                <div class="col s1 truncate">{{ bug.status }}</div>
+                <div class="col s1 hide-on-med-and-down">{{ bug.created }}</div>
+                <div class="col s1 hide-on-med-and-down">{{ bug.modified }}</div>
                 <div class="col s3 right-align">
                     <a href="{{url_for('edit_bug', bug_id=bug._id)}}" class="app-button purple">Edit</a>
+                    &nbsp;
                     <a href="{{url_for('mark_complete', bug_id=bug._id)}}" class="app-button blue">Complete</a>
                 </div>
             </div>

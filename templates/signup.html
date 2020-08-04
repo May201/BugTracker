@@ -1,20 +1,22 @@
 {% extends "base.html" %}
 {% block content %}
-    <div class="row">
-        <h4>New User Signup</h4>
-        {% if error %}
-            <p style="color: red;">User email already exists!</p>
-        {% endif %}
-        <form action="/signup" method="POST" class="col s12">
-            <div class="row">
-                <div class="input-field ">
-                    <input type="text" name="email" value="" placeholder="Enter email" class="validate">
+    <div class="container">
+        <div class="row">
+            <h4>New User Signup</h4>
+            {% if error %}
+                <p style="color: red;">User email already exists!</p>
+            {% endif %}
+            <form action="/signup" method="POST" class="col s12">
+                <div class="row">
+                    <div class="input-field ">
+                        <input type="text" name="email" value="" placeholder="Enter email" class="validate">
+                    </div>
+                    <div class="input-field">
+                        <input type="password" name="password" value="" placeholder="Enter password" class="validate">
+                    </div>
+                    <button type="submit" class="btn">Signup</button>
                 </div>
-                <div class="input-field">
-                    <input type="password" name="password" value="" placeholder="Enter password" class="validate">
-                </div>
-                <button type="submit" class="btn">Signup</button>
-            </div>
-        </form>
+            </form>
+        </div>
     </div>
 {% endblock %}
