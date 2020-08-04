@@ -1,41 +1,35 @@
-<!DOCTYPE html>
-<html lang="en">
-    <head>
-        <meta charset="utf-8">
-        <title>Bug Tracker</title>
-    </head>
-    <body>
-        <p>Welcome <span>User</span></p>
-        <p>
-            <form action="/create-bug" method="GET">
-                <button type="submit">Create Bug</button>
-            </form>
-        </p>
-        <p>
-            <table>
-                <thead>
-                    <th>
-                        <td>ID</td>
-                        <td>Name</td>
-                        <td>Description</td>
-                        <td>Priority</td>
-                        <td>Status</td>
-                        <td>Created</td>
-                        <td>Age</td>
-                    </th>
-                </thead>
-                <tbody>
+{% extends "base.html" %}
+{% block content %}
+    <p>Welcome <span>User</span></p>
+    <p>
+        <form action="/create-bug" method="GET">
+            <button type="submit">Create Bug</button>
+        </form>
+    </p>
+    <p>
+        <table>
+            <thead>
+                <tr>
+                    <td>ID</td>
+                    <td>Title</td>
+                    <td>Description</td>
+                    <td>Priority</td>
+                    <td>Status</td>
+                    <td>Created</td>
+                </tr>
+            </thead>
+            <tbody>
+                {% for bug in bugs %}
                     <tr>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
-                        <td></td>
+                        <td>{{ bug._id }}</td>
+                        <td>{{ bug.title }}</td>
+                        <td>{{ bug.desc }}</td>
+                        <td>{{ bug.priority }}</td>
+                        <td>{{ bug.status }}</td>
+                        <td>{{ bug.created }}</td>
                     </tr>
-                </tbody>
-            </table>
-        </p>
-    </body>
-</html>
+                {% endfor %}
+            </tbody>
+        </table>
+    </p>
+{% endblock %}
