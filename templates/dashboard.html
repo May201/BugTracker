@@ -1,58 +1,55 @@
 {% extends "base.html" %}
 {% block content %}
-    <div class="row">
-        <div class="col s10">
-            Welcome
-            {% if session.get('user_email', '') == '' %}
-                <span><b>Guest</b></span>
-            {% else %}
-                <span><b>{{ session['user_email'] }}</b></span>
-            {% endif %}
-        </div>
-        <div class="col s2">
-            {% if session.get('user_email', '') == '' %}
-                <a href="/login">Login</a>
-            {% else %}
-                <a href="/logout">Logout</a>
-            {% endif %}
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col s10">
+                Welcome
+                {% if session.get('user_email', '') == '' %}
+                    <span><b>Guest</b></span>
+                {% else %}
+                    <span><b>{{ session['user_email'] }}</b></span>
+                {% endif %}
+            </div>
+            <div class="col s2">
+                {% if session.get('user_email', '') == '' %}
+                    <a href="/login">Login</a>
+                {% else %}
+                    <a href="/logout">Logout</a>
+                {% endif %}
+            </div>
         </div>
     </div>
-    <div class="row">
+    <div class="container">
         <form action="/create-bug" method="GET" class="col s10">
             <button type="submit" class="btn">Create Bug</button>
         </form>
     </div>
-    <div class="row">
-        <table class="col s12">
-            <thead>
-                <tr>
-                    <td>ID</td>
-                    <td>Title</td>
-                    <td>Description</td>
-                    <td>Priority</td>
-                    <td>Status</td>
-                    <td>Created</td>
-                    <td>Modified</td>
-                    <td>Actions</td>
-                </tr>
-            </thead>
-            <tbody>
-                {% for bug in bugs %}
-                    <tr>
-                        <td>{{ bug._id }}</td>
-                        <td>{{ bug.title }}</td>
-                        <td>{{ bug.desc }}</td>
-                        <td>{{ bug.priority }}</td>
-                        <td>{{ bug.status }}</td>
-                        <td>{{ bug.created }}</td>
-                        <td>{{ bug.modified }}</td>
-                        <td>
-                            <a href="{{url_for('edit_bug', bug_id=bug._id)}}" class="waves-effect waves-light btn purple">Edit</a>
-                            <a href="{{url_for('mark_complete', bug_id=bug._id)}}" class="waves-effect waves-light btn blue">Complete</a>
-                        </td>
-                    </tr>
-                {% endfor %}
-            </tbody>
-        </table>
+    <br><br>
+    <div class="container">
+        <div class="row">
+            <div class="col s1">ID</div>
+            <div class="col s1">Title</div>
+            <div class="col s2">Description</div>
+            <div class="col s1">Priority</div>
+            <div class="col s1">Status</div>
+            <div class="col show-on-medium-and-up s1">Created</div>
+            <div class="col show-on-medium-and-up s1">Modified</div>
+            <div class="col s4 right-align">Actions</div>
+        </div>
+        {% for bug in bugs %}
+            <div class="row">
+                <div class="col s1 truncate">{{ bug._id }}</div>
+                <div class="col s2">{{ bug.title }}</div>
+                <div class="col s2 truncate">{{ bug.desc }}</div>
+                <div class="col s1">{{ bug.priority }}</div>
+                <div class="col s1">{{ bug.status }}</div>
+                <div class="col show-on-medium-and-up s1">{{ bug.created }}</div>
+                <div class="col show-on-medium-and-up s1">{{ bug.modified }}</div>
+                <div class="col s3 right-align">
+                    <a href="{{url_for('edit_bug', bug_id=bug._id)}}" class="app-button purple">Edit</a>
+                    <a href="{{url_for('mark_complete', bug_id=bug._id)}}" class="app-button blue">Complete</a>
+                </div>
+            </div>
+        {% endfor %}
     </div>
 {% endblock %}
