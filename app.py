@@ -15,6 +15,7 @@ db = PyMongo(app).db
 
 
 @app.route("/login", methods=["GET", "POST"])
+@app.route("/")
 def login():
     # Displaying the login page
     if request.method == "GET":
