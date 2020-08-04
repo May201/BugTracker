@@ -14,23 +14,23 @@
     </script>
 {% endblock %}
 {% block content %}
-    <p>Create a Bug</p>
+    <h4>Create a Bug</h4>
     <form action="/create-bug" method="POST">
         <div class="row">
             <div class="input-field col s12">
-                <input name="title">
+                <input name="title" class="validate">
                 <label for="title">Title</label>
             </div>
         </div>                        
         <div class="row">
             <div class="input-field col s12">
-                <textarea name="desc" cols="50" rows="5" placeholder="Enter a Description" class="materialize-textarea"></textarea>
+                <textarea name="desc" cols="50" rows="5" placeholder="Enter a Description" class="materialize-textarea validate" ></textarea>
                 <label for="desc">Description</label>
             </div>
         </div>                
         <div class="row">
             <div class="input-field col s12">
-                <select name="priority">
+                <select name="priority" class="validate">
                     <option>Urgent</option>
                     <option>High</option>
                     <option>Normal</option>
@@ -41,7 +41,7 @@
         </div>
         <div class="row">
             <div class="input-field col s12">
-                <select name="status">
+                <select name="status" class="validate">
                     <option>Open</option>
                     <option>Closed</option>
                     <option>In Progress</option>
@@ -52,10 +52,10 @@
         <div class="row">
             <div class="input-field col s12">
                 <i class="material-icons prefix">today</i>
-                <input name="created" type="text" class="datepicker">
+                <input name="created" type="text" class="datepicker validate">
                 <label for="icon_prefix">Created</label>
             </div>
         </div>
-        <button type="submit">Create</button>
+        <button type="submit" class="btn">Create</button>
     </form>
 {% endblock %}
