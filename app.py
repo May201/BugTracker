@@ -4,34 +4,42 @@ from flask_pymongo import PyMongo
 from bson.objectid import ObjectId
 
 
+# Flask application initialization
 app = Flask(__name__)
 app.config["MONGO_DBNAME"] = 'Bugtracker'
 app.config["MONGO_URI"] = os.getenv('MONGO_URI', 'mongodb://localhost')
 
+# Shortcut to the database
 db = PyMongo(app).db
 
 
 @app.route("/login", methods=["GET", "POST"])
 def login():
+    # Displaying the login page
     if request.method == "GET":
         return render_template("login.html")
 
+    # Check login details and then redirect to dashboard
     return redirect("/dashboard")
 
 
 @app.route("/signup", methods=["GET", "POST"])
 def signup():
+    # Display the signup page
     if request.method == "GET":
         return render_template("signup.html")
 
+    # On successfull signup, redirect to dashboard
     return redirect("/dashboard")
 
 
 @app.route("/create-bug", methods=["GET", "POST"])
 def create_bug():
     if request.method == "GET":
+        # Display the create bug page
         return render_template("create-bug.html")
     else:
+        # Insert the new bug details into the database
         db.Issue_Log.insert_one(request.form.to_dict())
         return redirect("/dashboard")
 
@@ -39,9 +47,12 @@ def create_bug():
 @app.route('/edit-bug/<bug_id>', methods=['GET', 'POST'])
 def edit_bug(bug_id):
     if request.method == 'GET':
+        # Find the bug details and then populate the Edit Bug page
         the_bug = db.Issue_Log.find_one({"_id": ObjectId(bug_id)})
         return render_template('edit-bug.html', bug=the_bug)
     else:
+        # Update the bug details in the database
+        # Redirect to the dashboard so that the latest list of bugs are shown
         db.Issue_Log.update(
             {'_id': ObjectId(bug_id)},
             {
@@ -58,6 +69,7 @@ def edit_bug(bug_id):
 
 @app.route('/mark_complete/<bug_id>')
 def mark_complete(bug_id):
+    # One-click action to change the status of a bug to completed
     db.Issue_Log.update(
         {'_id': ObjectId(bug_id)},
         {
@@ -71,6 +83,7 @@ def mark_complete(bug_id):
 
 @app.route('/dashboard')
 def dashboard():
+    # Common URL to load the dashboard
     return render_template(
         "dashboard.html",
         bugs=db.Issue_Log.find().sort('_id', -1)
@@ -78,6 +91,7 @@ def dashboard():
 
 
 if __name__ == '__main__':
+    # Start the web application
     app.run(
         host=os.environ.get('IP'),
         port=int(os.environ.get('PORT')),
