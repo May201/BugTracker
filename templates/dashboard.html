@@ -1,13 +1,15 @@
 {% extends "base.html" %}
 {% block content %}
-    <p>Welcome <span>User</span></p>
-    <p>
-        <form action="/create-bug" method="GET">
-            <button type="submit">Create Bug</button>
+    <div class="row">
+    <div class="col s10">Welcome <span>User</span></div>
+    </div>
+    <div class="row">
+        <form action="/create-bug" method="GET" class="col s10">
+            <button type="submit" class="btn">Create Bug</button>
         </form>
-    </p>
-    <p>
-        <table>
+    </div>
+    <div class="row">
+        <table class="col s12">
             <thead>
                 <tr>
                     <td>ID</td>
@@ -16,26 +18,28 @@
                     <td>Priority</td>
                     <td>Status</td>
                     <td>Created</td>
+                    <td>Modified</td>
                     <td>Actions</td>
                 </tr>
             </thead>
             <tbody>
                 {% for bug in bugs %}
                     <tr>
-                        <!-- <td><input type="radio" name="chosenID" value="{{ bug._id }}" onclick="updateSelected()"></td> -->
                         <td>{{ bug._id }}</td>
                         <td>{{ bug.title }}</td>
                         <td>{{ bug.desc }}</td>
                         <td>{{ bug.priority }}</td>
                         <td>{{ bug.status }}</td>
                         <td>{{ bug.created }}</td>
+                        <td>{{ bug.modified }}</td>
                         <td>
-                            <a href="{{url_for('mark_complete', task_id=bug._id)}}" class="waves-effect waves-light btn btn_small">Done</a>
-                            <a href="{{url_for('edit_task', task_id=bug._id)}}" class="waves-effect waves-light btn btn_small blue">Edit</a>
+                            <a href="{{url_for('edit_bug', bug_id=bug._id)}}" class="waves-effect waves-light btn btn_small blue">Edit</a>
+                            <a href="{{url_for('mark_complete', bug_id=bug._id)}}" class="waves-effect waves-light btn btn_small">Complete</a>
                         </td>
                     </tr>
                 {% endfor %}
             </tbody>
         </table>
-    </p>
+    </div>
+    </div>
 {% endblock %}

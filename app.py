@@ -36,22 +36,33 @@ def create_bug():
         return redirect("/dashboard")
 
 
-@app.route('/edit_task/<task_id>')
-def edit_task(task_id):
-    # the_task =  mongo.db.tasks.find_one({"_id": ObjectId(task_id)})
-    # all_categories =  mongo.db.categories.find()
-    # return render_template('edittask.html', task=the_task,
-    #                        categories=all_categories)
-    return redirect("/dashboard")
+@app.route('/edit-bug/<bug_id>', methods=['GET', 'POST'])
+def edit_bug(bug_id):
+    if request.method == 'GET':
+        the_bug = db.Issue_Log.find_one({"_id": ObjectId(bug_id)})
+        return render_template('edit-bug.html', bug=the_bug)
+    else:
+        db.Issue_Log.update(
+            {'_id': ObjectId(bug_id)},
+            {
+                '$set': {
+                    'title': request.form.get('title'),
+                    'desc': request.form.get('desc'),
+                    'priority': request.form.get('priority'),
+                    'modified': request.form.get('modified')
+                }
+            }
+        )
+        return redirect('/dashboard')
 
 
-@app.route('/mark_complete/<task_id>')
-def mark_complete(task_id):
+@app.route('/mark_complete/<bug_id>')
+def mark_complete(bug_id):
     db.Issue_Log.update(
-        {'_id': ObjectId(task_id)},
+        {'_id': ObjectId(bug_id)},
         {
             '$set': {
-                'status': 'Completed'
+                'status': 'Completed'  # Update only specific field
             }
         }
     )
