@@ -1,39 +1,80 @@
-<img src="https://codeinstitute.s3.amazonaws.com/fullstack/ci_logo_small.png" style="margin: 0;">
 
-Welcome May201,
+BugLogz
 
-This is the Code Institute student template for Gitpod. We have preinstalled all of the tools you need to get started. You can safely delete this README.md file, or change it for your own project.
+This is a simple bug tracking application created using Python Flask frame work. The application is designed to help a software development team share and manage bugs that have been discovered.
 
-## Gitpod Reminders
 
-To run a frontend (HTML, CSS, Javascript only) application in Gitpod, in the terminal, type:
 
-`python3 -m http.server`
+## User Stories
+Below is the list of user stories for the bug tracking application
+### Login
+This story is about the login flow for a user and the different stages involved.
 
-A blue button should appear to click: *Make Public*,
+**Signup:** 
+A new user can sign up for the application by entering an unique user email. The password does not have to be unique.
+**Screen Elements:** 
+There will be 2 input fields for entering the user email and password with a submit button to trigger validation of user input. For signup, the fields will be the same except for the submit button which will have a label of signup instead of submit
 
-Another blue button should appear to click: *Open Browser*.
+**Validation:** 
+The user input will be validated on the backend
 
-To run a backend Python file, type `python3 app.py`, if your Python file is named `app.py` of course.
+**Successful login/signup:** 
+If the user inputs are correct, then the user will be redirected to the landing page
+**Error page:** 
+If the user inputs are incorrect, then the user will be redirected to the error page with an option to try again
 
-A blue button should appear to click: *Make Public*,
+### Dashboard
+The Dashboard is shown after the user login is successful. By default, this page displays in a table:
+⋅⋅*Bugs currently available
+⋅⋅*Bugs sorted by most recently updated ones
 
-Another blue button should appear to click: *Open Browser*.
+### Bug Creation
+This page provides a form to create a new bug by entering the following bug attributes:
+⋅⋅*Name
+⋅⋅*Description
+⋅⋅*Reported date 
+⋅⋅*Status 
+⋅⋅*Submit
 
-In Gitpod you have superuser security privileges by default. Therefore you do not need to use the `sudo` (superuser do) command in the bash terminal in any of the backend lessons.
 
-## Updates Since The Instructional Video
+### Bug Updates
+This page provides a form to update an existing bug by entering the following bug attributes:
+⋅⋅*Name
+⋅⋅*Description
+⋅⋅*Status
 
-We continually tweak and adjust this template to help give you the best experience. Here are the updates since the original video was made:
 
-**April 16 2020:** The template now automatically installs MySQL instead of relying on the Gitpod MySQL image. The message about a Python linter not being installed has been dealt with, and the set-up files are now hidden in the Gitpod file explorer.
+## Technologies Used
+The project was created using the following technologies.
 
-**April 13 2020:** Added the _Prettier_ code beautifier extension instead of the code formatter built-in to Gitpod.
 
-**February 2020:** The initialisation files now _do not_ auto-delete. They will remain in your project. You can safely ignore them. They just make sure that your workspace is configured correctly each time you open it. It will also prevent the Gitpod configuration popup from appearing.
+#### Tools
+⋅⋅*Gitpod is the IDE used for developing this project.
+⋅⋅*PIP for installation of tools needed in this project.
+⋅⋅*Git to handle version control.
+⋅⋅*MongoDB Atlas is the database for this project
+⋅⋅*GitHub to store and share all project code remotely.
 
-**December 2019:** Added Eventyret's Bootstrap 4 extension. Type `!bscdn` in a HTML file to add the Bootstrap boilerplate. Check out the <a href="https://github.com/Eventyret/vscode-bcdn" target="_blank">README.md file at the official repo</a> for more options.
+#### Libraries
+⋅⋅*JQuery to simplify DOM manipulation.
+⋅⋅*Materialize to simplify the structure of the website and make the website responsive easily.
+⋅⋅*Google Fonts to style the website fonts.
+⋅⋅*PyMongo to make communication between Python and MongoDB possible.
+⋅⋅*Flask to construct and render pages.
+⋅⋅*Jinja to simplify displaying data from the backend of this project smoothly and effectively in html
+
+#### Languages
+This project uses HTML, CSS, JavaScript and Python programming languages.
+
+### Other Resources
+⋅⋅*w3schools
+⋅⋅*Stack Overflow
+⋅⋅*Slack
+
+
+
+
 
 --------
 
-Happy coding!
+
