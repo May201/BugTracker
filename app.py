@@ -71,7 +71,10 @@ def mark_complete(bug_id):
 
 @app.route('/dashboard')
 def dashboard():
-    return render_template("dashboard.html", bugs=db.Issue_Log.find())
+    return render_template(
+        "dashboard.html",
+        bugs=db.Issue_Log.find().sort('_id', -1)
+    )
 
 
 if __name__ == '__main__':
