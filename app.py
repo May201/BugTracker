@@ -38,7 +38,7 @@ def signup():
     if existing_user is None:
         db.users.insert_one(request.form.to_dict())
     else:
-        return render_template("/signup", error=True)
+        return render_template("signup.html", error=True)
 
     return redirect("/dashboard")
 
